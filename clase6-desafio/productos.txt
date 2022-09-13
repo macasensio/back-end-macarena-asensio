@@ -1,0 +1,20 @@
+[
+    {
+        "title":"Escuadra",
+        "price":"7",
+        "thumbail":"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png",
+        "id":1
+    },
+    {
+        "title":"Calculadora",
+        "price":"18",
+        "thumbail":"https://cdn1.iconfinder.com/data/icons/3d-isometric-color/512/calculator-iso-color.png",
+        "id":2
+    },
+    {
+        "title":"Globo terráqueo",
+        "price":"11",
+        "thumbail":"https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-512.png",
+        "id":3
+    }
+]
