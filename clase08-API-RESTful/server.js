@@ -7,17 +7,13 @@ const productosRouter = new Router()
 
 //middlewares
 const app = express()
-productosRouter.use(express.json())
-productosRouter.use(express.urlencoded({extended: true}))
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 app.use(express.static('./public'))
 
 
 //rutas
 app.use('/api/productos', productosRouter)
-app.get('/api/productos', productosRouter)
-app.post('/api/productos', productosRouter)
-app.put('/api/productos', productosRouter)
-app.delete('/api/productos', productosRouter)
 
 //mostrar todos los productos
 productosRouter.get('/', (req, res) => {
