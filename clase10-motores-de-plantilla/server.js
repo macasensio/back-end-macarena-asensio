@@ -16,14 +16,13 @@ const hbs = require('express-handlebars')
 //1
 app.engine('hbs', hbs.engine({
     extname: '.hbs',
-    // partialsDir:__dirname+'/views/partials',
-    layoutsDir:__dirname+'/views/layouts',
+    partialsDir:__dirname+'/views/partials',
     defaultLayout: 'formulario',
     defaultLayout: false
 }))
 
 //2
-app.set('views','views/layouts')
+app.set('views','./views')
 app.set('view engine', 'hbs')
 
 
@@ -40,7 +39,8 @@ app.get('/', (req, res) => {
 //productosRouter.get('/', (req, res) => {
 app.get('/productos', (req, res) => {
     //res.send('productosssssssssss')
-    res.render('productos')
+    const productos = productosApi.listarTodos()
+    res.render('productos', { productos })
     //res.json(productosApi.listarTodos())
 })
 

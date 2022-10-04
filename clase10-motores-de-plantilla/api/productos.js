@@ -13,18 +13,6 @@ class Productos {
             return false
         }
     }
-    #msjArrayVacio() {
-        return {mensaje: 'No puede realizar esta acción porque no hay productos'}
-    }
-
-    #filtrarProducto(id) {
-        const productoFiltrado = this.productos.filter(prod => prod.id == id)
-        if(productoFiltrado.length > 0) {
-            return productoFiltrado
-        } else {
-            return false
-        }
-    }
 
     // ---------- métodos públicos ----------//
     listarTodos() {
@@ -45,10 +33,7 @@ class Productos {
                 const nuevoProducto = {...prod, id: ++this.id}
                 this.productos.push(nuevoProducto)
                 const nuevoArray = this.productos
-                //return ({mensaje: 'producto guardado', prod})
-                console.log('Nuevo Array')
-                console.log(nuevoArray)
-                return 
+                return nuevoArray
             } else { 
                 return ({mensaje: 'faltan datos'})
             }

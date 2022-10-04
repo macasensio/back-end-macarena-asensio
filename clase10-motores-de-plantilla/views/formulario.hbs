@@ -10,8 +10,8 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1>Desafío clase 10 - Motores de plantilla</h1>
-        <hr>
+        {{>titulo}}
+
         
         {{!-- Formulario - Agregar producto --}}
         <form action="/productos" method="post" class="border border-dark p-5">
@@ -28,17 +28,16 @@
                 <input type="text" name="thumbnail" id="thumbnail" class="form-control" required>
             </div>
             <div class="d-grid gap-2">
-                <button class="btn btn-primary" type="submit">Agregar productos</button>
+                <button class="btn btn-success" type="submit">Agregar productos</button>
             </div>
-        </form>
+        </form>        
+    </div>
 
+    <div class="container mt-5 px-5">
         <div class="d-grid gap-2">
             <a class="btn btn-primary" href="/productos" role="button">Ver productos</a>
         </div>
-        
     </div>
-
-    
     
     {{!-- <div class="container mt-5">
         <form action="/productos" method="get">
