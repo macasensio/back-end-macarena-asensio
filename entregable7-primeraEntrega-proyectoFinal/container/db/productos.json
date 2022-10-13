@@ -1,0 +1,22 @@
+[
+  {
+    "timestamp": "13/10/2022 22:50:04",
+    "name": "libro 2",
+    "description": "libro 2 description",
+    "code": "A07",
+    "pic": "https://cdn3.iconfinder.com/data/icons/education-209/64/board-math-class-school-512.png",
+    "price": 22,
+    "stock": 22,
+    "id": 1
+  },
+  {
+    "timestamp": "13/10/2022 22:50:16",
+    "name": "libro 2",
+    "description": "libro 2 description",
+    "code": "A07",
+    "pic": "https://cdn3.iconfinder.com/data/icons/education-209/64/board-math-class-school-512.png",
+    "price": 22,
+    "stock": 22,
+    "id": 2
+  }
+]
