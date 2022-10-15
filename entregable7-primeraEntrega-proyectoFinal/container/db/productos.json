@@ -1,22 +1,32 @@
 [
-  {
-    "timestamp": "13/10/2022 22:50:04",
-    "name": "libro 2",
-    "description": "libro 2 description",
-    "code": "A07",
-    "pic": "https://cdn3.iconfinder.com/data/icons/education-209/64/board-math-class-school-512.png",
-    "price": 22,
-    "stock": 22,
-    "id": 1
-  },
-  {
-    "timestamp": "13/10/2022 22:50:16",
-    "name": "libro 2",
-    "description": "libro 2 description",
-    "code": "A07",
-    "pic": "https://cdn3.iconfinder.com/data/icons/education-209/64/board-math-class-school-512.png",
-    "price": 22,
-    "stock": 22,
-    "id": 2
-  }
+   {
+      "timestamp": "15/10/2022 11:45:43",
+      "name": "libro 1",
+      "description": "libro 1 description",
+      "code": "A01",
+      "pic": "https://cdn3.iconfinder.com/data/icons/education-209/64/board-math-class-school-512.png",
+      "price": 1,
+      "stock": 11,
+      "id": 1
+   },
+   {
+      "timestamp": "15/10/2022 11:45:51",
+      "name": "libro 2",
+      "description": "libro 2 description",
+      "code": "A02",
+      "pic": "https://cdn3.iconfinder.com/data/icons/education-209/64/board-math-class-school-512.png",
+      "price": 2,
+      "stock": 22,
+      "id": 2
+   },
+   {
+      "timestamp": "15/10/2022 11:45:59",
+      "name": "libro 3",
+      "description": "libro 3 description",
+      "code": "A02",
+      "pic": "https://cdn3.iconfinder.com/data/icons/education-209/64/board-math-class-school-512.png",
+      "price": 3,
+      "stock": 33,
+      "id": 3
+   }
 ]

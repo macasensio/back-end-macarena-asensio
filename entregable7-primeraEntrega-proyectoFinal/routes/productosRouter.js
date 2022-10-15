@@ -19,20 +19,24 @@ productosRouter.get('/', (req, res) => {
     let respuesta = controller.getAll()
     console.log('respuestaaaaaaaaaaaaaaaa')
     console.log(respuesta)
-    if (respuesta == undefined){
-        res.json({mensaje: 'no carrito found'})
+    /*if (respuesta !== undefined){
+        res.json({Productos: respuesta})
     } else {
-        res.json({respuesta})
-    }
-
+        res.json({mensaje: 'no carrito found'})
+    }*/
+    res.status(200).json({respuesta})
 })
 
 //1 - GET :id muestra un producto
 productosRouter.get('/:id', (req, res) => {
     //res.status(200).json(productosApi.listarProducto(req.params.id))
     console.log('----------- GET/:id -----------')
-    res.status(200).json(controller.getById(req.params.id))
     console.log('req.params.id --> ' + req.params.id)
+    //res.status(200).json(controller.getById(req.params.id))
+    let respuesta = controller.getById(req.params.id)
+    console.log('respuestaaaaaaaaaaaaaaaa')
+    console.log(respuesta)
+    res.status(200).json({respuesta})
 })
 
 //2 - POST agrego un producto
@@ -42,7 +46,11 @@ productosRouter.post('/', (req, res) => {
     if (admin) {
         let body = req.body        
         let product = new Producto(body.name, body.description, body.code, body.pic, body.price, body.stock)
-        res.status(200).json(controller.save(product))
+        //res.status(200).json(controller.save(product))
+        let respuesta = controller.save(product)
+        console.log('respuestaaaaaaa')
+        console.log(respuesta)
+        res.json({'Archivo guardado': respuesta})
     } else {
         console.log('acceso denegado')
         res.status(401).json({error: -1, descripcion: 'ruta http://localhost:8080/api/productos - método POST - no autorizada'})
@@ -64,7 +72,9 @@ productosRouter.put('/:id', (req, res) => {
         console.log(req.body)
         console.log('idddddddddd')
         console.log(id)
-        res.status(200).json(controller.update(product))
+        //res.status(200).json(controller.update(product))
+        let respuesta = controller.update(product)
+        res.status(200).json(respuesta)
     } else {
         console.log('acceso denegado')
         res.status(401).json({error: -1, descripcion: 'ruta http://localhost:8080/api/productos/:id - método PUT - no autorizada'})
@@ -72,29 +82,34 @@ productosRouter.put('/:id', (req, res) => {
     
 })
 
+//4 - DELETE eliminar un producto
+productosRouter.delete('/:id', (req, res) => {
+    if(admin){
+        console.log('----------- DELETE/:id -----------')
+        //res.status(200).json(productosApi.eliminar(req.params.id))
+        //res.status(200).json(controller.deleteById(req.params.id))
+        console.log('req.params.id --> ' + req.params.id)
+        let respuesta = controller.deleteById(req.params.id)
+        res.status(200).json(respuesta)
+    } else {
+        console.log('acceso denegado')
+        res.status(401).json({error: -1, descripcion: 'ruta http://localhost:8080/api/productos/:id - método DELETE - no autorizada'})
+    }
+})
+
 //DELETE all
 productosRouter.delete('/', (req, res) => {
     console.log('----------- DELETE -----------')
     if(admin) {
         //res.status(200).json(productosApi.eliminar(req.params.id))
-        res.status(200).json(controller.deleteAll())
+        let respuesta = controller.deleteAll()
+        //res.status(200).json(controller.deleteAll())
+        res.status(200).json(respuesta)
     } else {
         console.log('acceso denegado')
         res.status(401).json({error: -1, descripcion: 'ruta http://localhost:8080/api/productos - método DELETE - no autorizada'})
     }
 })
 
-//4 - DELETE eliminar un producto
-productosRouter.delete('/:id', (req, res) => {
-    if(admin){
-        console.log('----------- DELETE/:id -----------')
-        //res.status(200).json(productosApi.eliminar(req.params.id))
-        res.status(200).json(controller.deleteById(req.params.id))
-        console.log('req.params.id --> ' + req.params.id)
-    } else {
-        console.log('acceso denegado')
-        res.status(401).json({error: -1, descripcion: 'ruta http://localhost:8080/api/productos/:id - método DELETE - no autorizada'})
-    }
-})
 
 module.exports = productosRouter
