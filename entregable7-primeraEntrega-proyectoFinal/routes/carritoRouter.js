@@ -79,7 +79,7 @@ carritoRouter.get('/:id/productos', (req, res) => {
 
 
 //4 - agregar un producto en mi carrito
-carritoRouter.post('/:id/productos', (req, res) => {
+carritoRouter.post('/:id/productos', async (req, res) => {
     console.log('----------- POST/:id/productos -----------')
     //res.status(200).json(productosApi.guardar(req.body))
     // let body = req.body
@@ -87,17 +87,17 @@ carritoRouter.post('/:id/productos', (req, res) => {
     // res.status(200).json(controller.save(product))
 
     let id = req.params.id
-    console.log('ID')
-    console.log(id)
+    //console.log('ID')
+    //console.log(id)
     //busco mi carrito
-    let carrito = controller.getById(id)
-    console.log('CARRITO TRAIDO')
-    console.log(carrito)
+    let carrito = await controller.getById(id)
+    //console.log('CARRITO TRAIDO')
+    //console.log(carrito)
     
     //tengo el id de mi producto a agregar
-    const prodId = req.body.id
-    console.log('prodId')
-    console.log(prodId)
+    const prodId = Number(req.body.prodId)
+    //console.log('prodId')
+    //console.log(prodId)
     //busco mi producto
     let productoAagregar = controllerProductos.getById(prodId)
     console.log('producto a agregarrrrrrr')
@@ -107,9 +107,18 @@ carritoRouter.post('/:id/productos', (req, res) => {
 
     //agrego mi producto al carrito
     carrito[0].productos.push(productoAagregar)
+    console.log('carritoUpdateado')
+    console.log(carrito)
+    console.log('productos en mi carrito')
+    console.log(carrito[0].productos)
 
+    //método update
+    //yo le mando
+    console.log('------------- le mando el carrito ------------')
+    console.log(carrito)
+    controller.save(carrito)
 
-    
+    res.status(200).json({carrito, prodagregado: productoAagregar})
 })
 
 
@@ -121,15 +130,20 @@ carritoRouter.delete('/:id/productos/:id_prod', async (req, res) => {
     //res.status(200).json(controller.getById(req.params.id))
 
     let { id, id_prod } = req.params    
-    let cart = controller.getById(id)
+    let carrito = await controller.getById(id)
 
-    let index = cart.productos.findIndex((el, ind) => {
+    let index = cart.productos.findIndex(el => {
         if(el.id == id_prod) {
             return true
         }
     })
 
-    
+    let nuevosProductos = carrito.productos.filter(prod => prod.id != id_prod)
+    console.log(index, carrito.productos)
+    carrito.productos = nuevosProductos
+
+    let response = controller.update(carrito)
+    res.status(200).json({ respuesta: 'producto eliminado del carrito', carrito: response})
 })
 
 

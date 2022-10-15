@@ -69,7 +69,7 @@ module.exports = class File {
 
     //----------- POST -----------
     save(obj){ //recibe un objeto, lo guarda en el archivo, devuelve el id asignado
-        try {
+        /*try {
             const contenidoArchivo =  this.#leerUnArchivo()
             if (contenidoArchivo.length !==0) {
                 fs.writeFileSync(this.rutaArchivo, JSON.stringify([...contenidoArchivo, {...obj, id: contenidoArchivo[contenidoArchivo.length-1].id + 1}], null, 3), 'utf-8')
@@ -85,13 +85,33 @@ module.exports = class File {
             }        
         } catch (error) {
             console.log(error)
+        }*/
+        try {
+            const contenidoArchivo =  this.#leerUnArchivo()
+            if (contenidoArchivo == 0) {
+                obj.id = 1
+            } else {
+                obj.id = contenidoArchivo + 1
+            }
+            contenidoArchivo.push(obj)
+            fs.promises.writeFile(this.rutaArchivo, JSON.stringify(contenidoArchivo, null, '\t'))
+            .then(() => console.log('element saved'))
+
+        } catch (error) {
+            console.log(error)
         }
     }
 
     //----------- PUT/:id -----------
     update(obj){
         try {
+            console.log('\nobjeto recibido')
+            console.log(obj)
+            console.log('ID objeto recibido')
+            console.log(obj.id)
             const contenido = this.#leerUnArchivo()
+            console.log('contenido leído')
+            console.log(contenido)
             if (contenido.length > 0) {
                 const one = contenido.find(element => element.id == obj.id)
                 //acá primero encuentro el elemento en mi json.
