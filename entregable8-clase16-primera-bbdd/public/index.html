@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entregable 6 - Websockets</title>
+    <!-- HBS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
+        integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+        <!-- Socket -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+</head>
+<body>
+    <h1 class="text-center mt-4">Websockets</h1>
+    <hr>
+
+    
+    <div class="container"><!-- div container -->
+        <div class="row"><!-- div row -->
+            
+            <!-- DIV PRODUCTOS -->
+            <div class="col"> 
+
+                <div class="container p-5 bg-light">        
+                    <h2>Ingrese productos</h2>
+                    <!-- form productos -->
+                    <form onsubmit="return addProductos(this)" class="border border-dark p-5">
+                        <div class="mb-3">
+                            <label class="form-label">Title: </label>
+                            <input type="text" name="title" id="title" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Price: </label>
+                            <input type="number" name="price" id="price" class="form-control" required>
+                        </div>
+                        <div class="mb-5">
+                            <label class="form-label">Thumbnail: </label>
+                            <input type="url" name="thumbnail" id="thumbnail" class="form-control" required>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-success">Enviar</button>
+                        </div>
+                    </form>
+                    <!-- fin form productos -->   
+                    
+                    <!-- div lista productos -->
+                    <div class="container mt-5">
+                        <h3>Lista de productos</h3>
+                        <div id="productos"></div>
+                    </div>
+                    <!-- fin div lista productos -->
+
+                </div><!-- fin container -->
+            <!--</div>  fin col div -->
+
+            <!-- DIV PRODUCTOS -->
+            <hr>
+            
+
+            <!-- DIV CHAT -->
+            <!-- <div class="col"> -->
+
+                <div class="container p-5 bg-light">
+                    <h2>Centro de mensajes</h2>
+
+                    <!-- form chat -->
+                    <form onsubmit="return addMessage(this)" class="border border-dark p-5">
+
+                        <!-- input email -->
+                        <div class="mb-3" id="divNombre">
+                            <label class="form-label">Email: </label>
+                            <input type="text" name="email" id="inputEmail" class="form-control" placeholder="email@email.com">
+                        </div>
+                        <hr>
+                        <!-- div mensajes -->
+                        <div class="container">
+                            <div id="messages"></div>
+                        </div>
+                        <!-- fin div mensajes -->
+
+                        <!-- input mensaje -->
+                        <div class="mb-3 mt-3" id="divMensaje">
+                            <label class="form-label">Mensaje: </label>
+                            <input type="text" name="text" id="inputMensaje" class="form-control" placeholder="Mensaje" required disabled>
+                        </div>
+
+                        <!-- input button -->
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" id="btnEnviar" disabled>Enviar</button>
+                        </div>
+
+                    </form>
+                    <!-- fin form chat -->
+                    
+
+                </div><!-- fin container -->
+            </div><!-- fin col div -->
+            <!-- FIN DIV CHAT -->
+
+        </div><!-- fin div row -->
+    </div><!-- fin div container -->    
+
+    <script src="main.js"></script>
+
+</body>
+</html>
