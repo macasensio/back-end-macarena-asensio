@@ -54,6 +54,7 @@ function cambiarEstado () {
 }
 
 // addMessage
+// recibe el msj y lo manda a guardar
 const addMessage = (e) => {
     const author = document.getElementById('inputEmail').value
     const text = document.getElementById('inputMensaje').value
@@ -62,8 +63,11 @@ const addMessage = (e) => {
     return false
 }
 
-
+// renderiza lo que recibe en el socket.on
 const render = (arrayMensajes) => {
+    console.log('RENDERIZANDO')
+    console.log('DATAAAAAAAAAAAAAAAAAAA')
+    console.log(arrayMensajes)
     if (arrayMensajes.length > 0) {
         const html = arrayMensajes.map((elem) => {
             return (`
@@ -78,9 +82,11 @@ const render = (arrayMensajes) => {
     }
 }
 
+
 //escucho al servidor
 socket.on('mensajes', (data) => {
     console.log('socket.on() -> recibiendo msjs')
     console.log(data)
     render(data)
 })
+

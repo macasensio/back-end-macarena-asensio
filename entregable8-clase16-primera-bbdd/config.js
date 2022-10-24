@@ -12,7 +12,8 @@ const dbConnection = {
         client: 'sqlite3',
         connection: {
             filename: './DB/ecommerce.sqlite'
-        }, useNullAsDefault: true
+        },
+        useNullAsDefault: true
     }
 }
 

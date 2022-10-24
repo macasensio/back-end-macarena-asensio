@@ -11,6 +11,12 @@ class productosMariaDB {
     constructor(configConnection, tabla){
         this.knex = knex(configConnection)
         this.tabla = tabla
+        //console.log('configConnection')
+        //console.log(configConnection)
+        console.log('nombre tabla --------> ' + tabla)
+
+        console.log('----------- knex(this.tabla) ------------')
+        //console.log(knex(this.tabla).select('*'))
     }
 
 
@@ -22,7 +28,7 @@ class productosMariaDB {
             return false
         }
     }*/
-    #chequearTabla(tabla) {
+    /*#chequearTabla(tabla) {
         const contenido = this.knex.from(this.tabla).select('*')
         console.log(contenido)
         if (contenido == null){
@@ -36,15 +42,38 @@ class productosMariaDB {
         } else {
             return false
         }
-    }
+    }*/
 
     //con el método "chequearArray" sería chequear si existe esa tabla. si no existe, crearla.
+
+    async crearTabla(){
+        console.log('CREAR TABLA PRODUCTOS EJECUTANDOSE')
+        try {            
+            if (knex(this.tabla).select('*') == undefined) {
+                await knex.schema.createTable(this.tabla, table => {
+                    table.increments('id')
+                    table.string('title')
+                    table.float('price')
+                    table.string('thumbnail')
+                })
+            }
+        } catch (error) {
+            // console.log('---- Error en productosMariaDB.crearTabla() ----')
+            // console.log(error)
+            return new Error(`Error ${error}`)
+        }
+    }
 
     // ---------- métodos públicos ----------//
     async listarTodos(){
         try {
-            return await this.knex.from(this.tabla).select('*')
+            const productosDDBB = await this.knex.from(this.tabla).select('*')
+            console.log('estos son los productos de la DDBB Mysql')
+            console.log(productosDDBB)
+            return productosDDBB
         } catch (error) {
+            // console.log('---- Error en productosMariaDB.listarTodos() ----')
+            // console.log(error)
             return new Error(`Error ${error}`)
         }
     }
@@ -67,6 +96,8 @@ class productosMariaDB {
         try {
             return await this.knex(this.tabla).insert(prod)
         } catch (error) {
+            console.log('---- Error en productosMariaDB.guardar(prod) ----')
+            console.log(error)
             return new Error(`Error ${error}`)
         }
     }

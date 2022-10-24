@@ -2,7 +2,7 @@
 const express = require('express')
 //APIs
 const productosMariaDB = require('./api/productos.js')
-const Mensajes = require('./api/mensajes.js')
+const MensajesSqlite3 = require('./api/mensajes.js')
 //Sockets
 const { Server: HttpServer } = require('http')
 const { Server: IOServer } = require('socket.io')
@@ -13,6 +13,7 @@ const { dbConnection } = require('./config')
 //const productosApi = new Productos()
 //const mensajesApi = new Mensajes()
 const productosApi = new productosMariaDB(dbConnection.mysql, 'productos')
+const mensajesApi = new MensajesSqlite3(dbConnection.sqlite, 'mensajes')
 
 
 const app = express()
@@ -22,20 +23,27 @@ const io = new IOServer(httpServer)
 
 //configuro el socket
 io.on('connection', cliente => {
-    console.log('Un cliente se conectó')  
+    console.log('Un cliente se conectó')
 
     // ----------- CHAT -----------
+    mensajesApi.crearTabla()
     //carga inicial de mensajes
     cliente.emit('mensajes', mensajesApi.listarTodos())
 
     //actualizacion de mensajes
     cliente.on('new-msj', mensaje => {
+        console.log('mensaje que va a guardarse a la ddbb')
+        console.log(mensaje)
+        //guardo mi msj
         mensajesApi.guardar(mensaje)
+        //mando a imprimir mis msjs
         io.sockets.emit('mensajes', mensajesApi.listarTodos())
     })
 
 
     // ----------- PRODUCTOS -----------
+    productosApi.crearTabla()
+
     //carga inicial de productos
     cliente.emit('productos', productosApi.listarTodos())
 
