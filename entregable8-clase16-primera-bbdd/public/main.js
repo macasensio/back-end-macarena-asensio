@@ -24,7 +24,7 @@ function makeHtmlTable (productos) {
 
 //escucho al servidor
 socket.on('productos', productos => {
-    console.log('socket.on() -> recibiendo productos')
+    console.log('socket.on() -> recibiendo productossssssss')
     console.log(productos)
     makeHtmlTable(productos).then(html => {
         document.getElementById('productos').innerHTML = html
@@ -65,8 +65,7 @@ const addMessage = (e) => {
 
 // renderiza lo que recibe en el socket.on
 const render = (arrayMensajes) => {
-    console.log('RENDERIZANDO')
-    console.log('DATAAAAAAAAAAAAAAAAAAA')
+    console.log('RENDERIZANDO data arrayMensajes recibidos')
     console.log(arrayMensajes)
     if (arrayMensajes.length > 0) {
         const html = arrayMensajes.map((elem) => {
@@ -79,14 +78,17 @@ const render = (arrayMensajes) => {
             `)
         }).join(" ");
         document.getElementById('messages').innerHTML = html;
+    } else {
+        console.log('error renderizando msj')
     }
 }
 
 
 //escucho al servidor
-socket.on('mensajes', (data) => {
+socket.on('mensajes', (arrayMensajes) => {
     console.log('socket.on() -> recibiendo msjs')
-    console.log(data)
-    render(data)
+    console.log('arrayMensajes recibido')
+    console.log(arrayMensajes)
+    render(arrayMensajes)
 })
 

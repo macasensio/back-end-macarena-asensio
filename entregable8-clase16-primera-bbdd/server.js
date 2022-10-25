@@ -21,36 +21,44 @@ const httpServer = new HttpServer(app)
 const io = new IOServer(httpServer) 
 
 
+
+
 //configuro el socket
 io.on('connection', cliente => {
     console.log('Un cliente se conectó')
 
     // ----------- CHAT -----------
-    mensajesApi.crearTabla()
+    
     //carga inicial de mensajes
     cliente.emit('mensajes', mensajesApi.listarTodos())
 
     //actualizacion de mensajes
     cliente.on('new-msj', mensaje => {
-        console.log('mensaje que va a guardarse a la ddbb')
-        console.log(mensaje)
+        //console.log('mensaje que va a guardarse a la ddbb')
+        //console.log(mensaje)
         //guardo mi msj
         mensajesApi.guardar(mensaje)
         //mando a imprimir mis msjs
         io.sockets.emit('mensajes', mensajesApi.listarTodos())
+        console.log('mensajes finales')
+        console.log(mensajesApi.listarTodos())
     })
-
+    
 
     // ----------- PRODUCTOS -----------
-    productosApi.crearTabla()
-
     //carga inicial de productos
     cliente.emit('productos', productosApi.listarTodos())
 
     //actualizacion de productos
     cliente.on('new-prod', producto => {
+        //console.log('producto recibido para guardarse')
+        //console.log(producto)
         productosApi.guardar(producto)
+        //mando mis productos a que se vean
+        //console.log('primero emito los prod y le mando el resultado de listarTodos()')
         io.sockets.emit('productos', productosApi.listarTodos())
+        console.log('CONSOLOGUEO productosApi.listarTodos()')
+        console.log(productosApi.listarTodos())
     })
 })
 
