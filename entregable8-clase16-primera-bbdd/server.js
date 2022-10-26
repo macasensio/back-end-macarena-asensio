@@ -24,41 +24,31 @@ const io = new IOServer(httpServer)
 
 
 //configuro el socket
-io.on('connection', cliente => {
+io.on('connection', async cliente => {
     console.log('Un cliente se conectó')
 
     // ----------- CHAT -----------
     
     //carga inicial de mensajes
-    cliente.emit('mensajes', mensajesApi.listarTodos())
+    cliente.emit('mensajes', await mensajesApi.listarTodos())
 
     //actualizacion de mensajes
-    cliente.on('new-msj', mensaje => {
-        //console.log('mensaje que va a guardarse a la ddbb')
-        //console.log(mensaje)
+    cliente.on('new-msj', async mensaje => {
         //guardo mi msj
-        mensajesApi.guardar(mensaje)
+        await mensajesApi.guardar(mensaje)
         //mando a imprimir mis msjs
-        io.sockets.emit('mensajes', mensajesApi.listarTodos())
-        console.log('mensajes finales')
-        console.log(mensajesApi.listarTodos())
+        io.sockets.emit('mensajes', await mensajesApi.listarTodos())
     })
     
 
     // ----------- PRODUCTOS -----------
     //carga inicial de productos
-    cliente.emit('productos', productosApi.listarTodos())
+    cliente.emit('productos', await productosApi.listarTodos())
 
     //actualizacion de productos
-    cliente.on('new-prod', producto => {
-        //console.log('producto recibido para guardarse')
-        //console.log(producto)
-        productosApi.guardar(producto)
-        //mando mis productos a que se vean
-        //console.log('primero emito los prod y le mando el resultado de listarTodos()')
-        io.sockets.emit('productos', productosApi.listarTodos())
-        console.log('CONSOLOGUEO productosApi.listarTodos()')
-        console.log(productosApi.listarTodos())
+    cliente.on('new-prod', async producto => {
+        await productosApi.guardar(producto)
+        io.sockets.emit('productos', await productosApi.listarTodos())
     })
 })
 

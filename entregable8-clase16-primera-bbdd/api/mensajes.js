@@ -1,42 +1,27 @@
 const knex = require('knex')
-
 class MensajesSqlite3 {
 
-    constructor(configConnection, tabla){
+    constructor(configConnection, table){
         this.knex = knex(configConnection)
-        this.tabla = tabla
+        this.table = table
     }    
 
     async listarTodos(){
-        console.log('listarTodos los mensajes')
         try {
-            const mensajesDDBB = await this.knex.from(this.tabla).select('*')
-            //console.log('estos son los mensajes de la DDBB Sqlite3')
-            console.log(typeof mensajesDDBB)
-            //return JSON.parse(JSON.stringify(mensajesDDBB))
-            return mensajesDDBB
+            return await this.knex.from(this.table).select('*')
         } catch (error) {
-            console.log('---- Error en MensajesSqlite3.listarTodos() ----')
-            // console.log(error)
-            //return new Error(`Error ${error}`)
+            console.log(error)
         }
     }
 
 
     async guardar(msj){
-        console.log('guardar(msj) MENSAJES EJECUTANDOSE')
         try {
-            console.log('msj recibido para ser guardado')
-            console.log(msj)            
-            console.log('msj guardado')
-            return await this.knex(this.tabla).insert(msj)
+            return await this.knex(this.table).insert(msj)
         } catch (error) {
-            console.log('---- Error en MensajesSqlite3.guardar(msj) ----')
-            // console.log(error)
-            //return new Error(`Error ${error}`)
+            console.log(error)
         }
     }
-
 }
 
 module.exports = MensajesSqlite3

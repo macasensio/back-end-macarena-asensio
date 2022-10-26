@@ -21,7 +21,6 @@ const createDataTableProd = async () => {
     ]
     
     await knexProd('productos').insert(productos)
-    console.log('agregando productos estáticos a la tabla')
     
     } catch (error) {        
         console.log('error creando tabla')
@@ -51,7 +50,6 @@ const createDataTableMsjs = async () => {
         ]
         
         await knexMsjs('mensajes').insert(arrayMsjsDePrueba)
-        console.log('agregando mensajes estáticos a la tabla')
         
         } catch (error) {            
             console.log('error creando tabla')
@@ -61,15 +59,16 @@ const createDataTableMsjs = async () => {
         }
 }
 
-createDataTableProd()
+//createDataTableProd()
 //createDataTableMsjs()
 
 const pedirProductos = async () => {
     console.log(await knexProd.from('productos').select('*'))
 }
-//pedirProductos()
 
 const pedirMensajes = async () => {
     console.log(await knexMsjs.from('mensajes').select('*'))
 }
+
+//pedirProductos()
 //pedirMensajes()

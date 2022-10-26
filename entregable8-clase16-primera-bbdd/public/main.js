@@ -4,7 +4,6 @@ const socket = io.connect()
 // ------------------------------- PRODUCTOS -------------------------------
 // addProductos
 const addProductos = (e) => {
-    console.log('add productos')
     const title = document.getElementById('title').value
     const price = document.getElementById('price').value
     const thumbnail = document.getElementById('thumbnail').value
@@ -24,8 +23,6 @@ function makeHtmlTable (productos) {
 
 //escucho al servidor
 socket.on('productos', productos => {
-    console.log('socket.on() -> recibiendo productossssssss')
-    console.log(productos)
     makeHtmlTable(productos).then(html => {
         document.getElementById('productos').innerHTML = html
     })
@@ -64,31 +61,23 @@ const addMessage = (e) => {
 }
 
 // renderiza lo que recibe en el socket.on
-const render = (arrayMensajes) => {
-    console.log('RENDERIZANDO data arrayMensajes recibidos')
-    console.log(arrayMensajes)
-    if (arrayMensajes.length > 0) {
-        const html = arrayMensajes.map((elem) => {
+const render = (arrayMensajes) => {if (arrayMensajes.length > 0) {
+        const listaMensajes = arrayMensajes.map(msj => {
             return (`
                 <div>
-                    <b style="color:blue;">${elem.author}</b>
-                    [<span style="color:brown;">${elem.fyh}</span>] :
-                    <i style="color:green;">${elem.text}</i>
+                    <b style="color:blue;">${msj.author}</b>
+                    [<span style="color:brown;">${msj.fyh}</span>] :
+                    <i style="color:green;">${msj.text}</i>
                 </div>
             `)
         }).join(" ");
-        document.getElementById('messages').innerHTML = html;
-    } else {
-        console.log('error renderizando msj')
+        document.getElementById('messages').innerHTML = listaMensajes;
     }
 }
 
 
 //escucho al servidor
-socket.on('mensajes', (arrayMensajes) => {
-    console.log('socket.on() -> recibiendo msjs')
-    console.log('arrayMensajes recibido')
-    console.log(arrayMensajes)
-    render(arrayMensajes)
+socket.on('mensajes', (data) => {
+    render(data)
 })
 
