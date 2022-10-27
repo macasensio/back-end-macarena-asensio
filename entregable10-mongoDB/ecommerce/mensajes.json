@@ -1,0 +1,71 @@
+[{
+  "_id": {
+    "$oid": "635adc5ff5457cd490746179"
+  },
+  "author": "Macarena",
+  "text": "Hola!",
+  "fyh": "new Date()"
+},{
+  "_id": {
+    "$oid": "635adc5ff5457cd49074617a"
+  },
+  "author": "Luchi",
+  "text": "Hola, qué tal?",
+  "fyh": "new Date()"
+},{
+  "_id": {
+    "$oid": "635adc5ff5457cd49074617b"
+  },
+  "author": "Pedro",
+  "text": "Buenas",
+  "fyh": "new Date()"
+},{
+  "_id": {
+    "$oid": "635adc5ff5457cd49074617c"
+  },
+  "author": "Luchi",
+  "text": "Entregable 10 - Mongo DB",
+  "fyh": "new Date()"
+},{
+  "_id": {
+    "$oid": "635adc5ff5457cd49074617d"
+  },
+  "author": "Macarena",
+  "text": "Va queriendo",
+  "fyh": "new Date()"
+},{
+  "_id": {
+    "$oid": "635adc5ff5457cd49074617e"
+  },
+  "author": "Pedro",
+  "text": "Same",
+  "fyh": "new Date()"
+},{
+  "_id": {
+    "$oid": "635adc5ff5457cd49074617f"
+  },
+  "author": "Pedro",
+  "text": "3 de humita y 2 de calabaza",
+  "fyh": "new Date()"
+},{
+  "_id": {
+    "$oid": "635adc5ff5457cd490746180"
+  },
+  "author": "Luchi",
+  "text": "Pizza",
+  "fyh": "new Date()"
+},{
+  "_id": {
+    "$oid": "635adc5ff5457cd490746181"
+  },
+  "author": "Macarena",
+  "text": "Manzana",
+  "fyh": "new Date()"
+},{
+  "_id": {
+    "$oid": "635adc5ff5457cd490746182"
+  },
+  "author": "Luchi",
+  "text": "Pera",
+  "fyh": "new Date()"
+}]

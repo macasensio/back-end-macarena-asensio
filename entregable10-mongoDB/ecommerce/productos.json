@@ -1,0 +1,65 @@
+[{
+  "_id": {
+    "$oid": "635ade28f5457cd490746186"
+  },
+  "title": "Crayones",
+  "price": 1280,
+  "thumbnail": "thumbnail 4",
+  "stock": 100
+},{
+  "_id": {
+    "$oid": "635ade28f5457cd490746187"
+  },
+  "title": "Calculadora pequeña",
+  "price": 1700,
+  "thumbnail": "thumbnail 5",
+  "stock": 100
+},{
+  "_id": {
+    "$oid": "635ade28f5457cd490746188"
+  },
+  "title": "Calculadora científica",
+  "price": 2300,
+  "thumbnail": "thumbnail 6",
+  "stock": 100
+},{
+  "_id": {
+    "$oid": "635ade28f5457cd490746189"
+  },
+  "title": "Lapices 24 colores",
+  "price": 2860,
+  "thumbnail": "thumbnail 7",
+  "stock": 100
+},{
+  "_id": {
+    "$oid": "635ade28f5457cd49074618a"
+  },
+  "title": "Cartuchera",
+  "price": 3350,
+  "thumbnail": "thumbnail 8",
+  "stock": 100
+},{
+  "_id": {
+    "$oid": "635ade28f5457cd49074618b"
+  },
+  "title": "Pluma Parker",
+  "price": 4320,
+  "thumbnail": "thumbnail 9",
+  "stock": 0
+},{
+  "_id": {
+    "$oid": "635ade28f5457cd49074618c"
+  },
+  "title": "Mochila",
+  "price": 4990,
+  "thumbnail": "thumbnail 10",
+  "stock": 0
+},{
+  "_id": {
+    "$oid": "635adf0df5457cd49074618d"
+  },
+  "title": "Mochila Peppa",
+  "price": 4870,
+  "thumbnail": "thumbnail 11",
+  "stock": 0
+}]
