@@ -1,0 +1,50 @@
+Crear base de datos llamada ecommerce que contenga dos colecciones: mensajes y productos
+use ecommerce
+
+
+1  y 2 - agregar 10 documentos con valores distintos a las colecciones
+db.mensajes.insertMany([{author: 'Macarena', text: 'Hola!', fyh: 'new Date()'}, {author: 'Luchi', text: 'Hola, qué tal?', fyh: 'new Date()'}, {author: 'Pedro', text: 'Buenas', fyh: 'new Date()'}, {author: 'Luchi', text: 'Entregable 10 - Mongo DB', fyh: 'new Date()'}, {author: 'Macarena', text: 'Va queriendo', fyh: 'new Date()'}, {author: 'Pedro', text: 'Same', fyh: 'new Date()'}, {author: 'Pedro', text: '3 de humita y 2 de calabaza', fyh: 'new Date()'}, {author: 'Luchi', text: 'Pizza', fyh: 'new Date()'}, {author: 'Macarena', text: 'Manzana', fyh: 'new Date()'}, {author: 'Luchi', text: 'Pera', fyh: 'new Date()'}])
+db.productos.insertMany([{title: 'Lapicera Bic', price: 120, thumbnail: 'thumbnail 1'}, {title: 'Cuaderno tapa dura', price: 580, thumbnail: 'thumbnail 2'}, {title: 'Cuaderno Disney', price: 900, thumbnail: 'thumbnail 3'}, {title: 'Crayones', price: 1280, thumbnail: 'thumbnail 4'}, {title: 'Calculadora pequeña', price: 1700, thumbnail: 'thumbnail 5'}, {title: 'Calculadora científica', price: 2300, thumbnail: 'thumbnail 6'}, {title: 'Lapices 24 colores', price: 2860, thumbnail: 'thumbnail 7'}, {title: 'Cartuchera', price: 3350, thumbnail: 'thumbnail 8'}, {title: 'Pluma Parker', price: 4320, thumbnail: 'thumbnail 9'}, {title: 'Mochila', price: 4990, thumbnail: 'thumbnail 10'}])
+
+
+3 - Listar todos los documentos en cada colección
+db.mensajes.find()
+db.productos.find()
+
+
+4 - Mostrar la cantidad de documentos almacenados en cada una de ellas
+db.mensajes.estimatedDocumentCount()
+db.productos.estimatedDocumentCount()
+
+
+5 - Realizar un CRUD sobre la colección de productos:
+a - agregar un producto más a la colección
+db.productos.insertOne({title: 'Mochila Peppa', price: 4870, thumbnail: 'thumbnail 11'})
+
+b - realizar una consulta por nombre de producto específico
+db.productos.find({title: 'Cuaderno tapa dura'})
+
+i) listar los productos con precio menor a 1000
+db.productos.find({price: {$lt: 1000}})
+
+ii) listar los productos con precio entre los 1000 a 3000 pesos
+db.productos.find({$and: [{price:  {$gt: 1000}},{price:  {$lt: 3000}}]})
+
+iii) listar los productos con precio mayor a 3000
+db.productos.find({price: {$gt: 3000}})
+
+iv) realizar una consulta que traiga sólo el nombre del tercer producto más barato
+db.productos.find({},{title: 1, _id: 0}).skip(2).limit(1).sort({price: 1})
+
+c - hacer una actualización sobre todos los productos, agregando el campo stock a todos ellos con un valor de 100
+db.productos.updateMany({}, {$set: {stock: 100}})
+
+d - cambiar el stock a cero de los productos con precios mayores a 4000 pesos
+db.productos.updateMany({price: {$gt: 4000}},{$set: {stock: 0}})
+
+e - borrar los productos con precio menor a 1000 pesos
+db.productos.deleteMany({price: {$lt: 1000}})
+
+
+6 - Crear un usuario 'pepe', clave: 'asd456' que sólo pueda leer la base de datos ecommerce. Verificar que pepe no pueda cambiar la información
+db.createUser({user: 'pepe', pwd: 'asd456', roles: [{role: 'read', db: 'ecommerce'}]})
